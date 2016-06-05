@@ -165,7 +165,6 @@ ORDER BY node.lft' );
 		$myLeft = intval( $stmt['lft'] );
 
 		$width = $myRight - $myLeft + 1;
-//		var_dump($id, $myLeft, $myRight ,$width);
 
 		$stmt = $pdo->prepare( 'DELETE from table_list where lft BETWEEN ? and ?' );
 		$stmt->execute( array( $myLeft, $myRight ) );

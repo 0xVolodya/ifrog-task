@@ -1,23 +1,22 @@
-/**
- * Created by vova on 02.06.16.
- */
-$(document).ready(function () {
 
-    $('body').on('click', '#button1', function (e) {
+$(document).ready(function () {
+    $body=$('body');
+
+    $body.on('click', '#button1', function (e) {
         e.preventDefault();
 
         var name = prompt('Как вас зовут', 100);
         $(".heading").html(name);
     });
 
-    $('body').on('click', '#button2', function (e) {
+    $body.on('click', '#button2', function (e) {
         e.preventDefault();
 
         var input1 = $('#input1');
         input1.attr('type', 'input');
     });
 
-    $('body').on('click', '#button3', function (e) {
+    $body.on('click', '#button3', function (e) {
         e.preventDefault();
         var input1 = $('#input1'),
             parent_id = 1;
@@ -51,7 +50,6 @@ $(document).ready(function () {
 
                 $(".select_wrapper").html(array["select"]);
 
-                //window.location.reload();
 
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -81,7 +79,6 @@ $(document).ready(function () {
                 $(".list_wrapper").html(array["list"]);
 
                 $(".select_wrapper").html(array["select"]);
-                //window.location.reload();
 
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -91,18 +88,17 @@ $(document).ready(function () {
         })
     });
 
-    $('body').on('click', '.reply_button', function (e) {
+    $body.on('click', '.reply_button', function (e) {
             e.preventDefault();
 
             $this = $(this);
             var id = $this.attr("id");
             $(".li_comment_" + id).append($(".form"));
             console.log(id);
-            //$(".reply_id").attr("value", id);
             $(".reply_id").attr("value", id);
         }
-    )
-    ;
+    );
+
 
 });
 

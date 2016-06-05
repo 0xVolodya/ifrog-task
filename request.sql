@@ -4,8 +4,6 @@ CREATE TABLE `table_list`(
 `user_name`VARCHAR (255)not NULL,
 `parent_id`int(100),
 
--- `text`VARCHAR (100)not NULL,
-
 `lft`int(100) not NULL,
 `rgt`int(100) not NULL
 );
