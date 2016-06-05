@@ -3,21 +3,21 @@
  */
 $(document).ready(function () {
 
-    $("#button1").click(function (e) {
+    $('body').on('click', '#button1', function (e) {
         e.preventDefault();
 
         var name = prompt('Как вас зовут', 100);
         $(".heading").html(name);
     });
 
-    $("#button2").click(function (e) {
+    $('body').on('click', '#button2', function (e) {
         e.preventDefault();
 
         var input1 = $('#input1');
         input1.attr('type', 'input');
     });
 
-    $("#button3").click(function (e) {
+    $('body').on('click', '#button3', function (e) {
         e.preventDefault();
         var input1 = $('#input1'),
             parent_id = 1;
@@ -33,22 +33,25 @@ $(document).ready(function () {
             "parent_id": parent_id
         };
 
-        //var xmlhttp = new XMLHttpRequest();
-        //
-        //xmlhttp.open("GET", "create.php?q=" + input1.val(), true);
-        //xmlhttp.send();
-        //if (xmlhttp.status != 200) {
-        //    window.location.reload();
-        //}
+
         console.log(JSON.stringify(person));
         console.log(person);
 
         $.ajax({
             type: 'post',
             url: 'create.php',
-            data: {data:JSON.stringify(person)},
+            data: {data: JSON.stringify(person)},
             success: function (data) {
-                window.location.reload();
+                var array=JSON.parse(data);
+                console.log(array["list"]);
+
+                $(".form_wrapper").html($(".form"));
+
+                $(".list_wrapper").html(array["list"]);
+
+                $(".select_wrapper").html(array["select"]);
+
+                //window.location.reload();
 
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -58,10 +61,10 @@ $(document).ready(function () {
         })
     });
 
-    $("select").on('change', function (e) {
+    $(".select_wrapper").on('change','select', function (e) {
         e.preventDefault();
         console.log($(this).val());
-        var person ={
+        var person = {
 
             id: $(this).val()
         };
@@ -69,9 +72,17 @@ $(document).ready(function () {
         $.ajax({
             type: 'post',
             url: 'delete.php',
-            data: {data:JSON.stringify(person)},
+            data: {data: JSON.stringify(person)},
             success: function (data) {
-                window.location.reload();
+                var array=JSON.parse(data);
+
+                $(".form_wrapper").html($(".form"));
+
+                $(".list_wrapper").html(array["list"]);
+
+                $(".select_wrapper").html(array["select"]);
+                //window.location.reload();
+
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 console.log(xhr.status);
@@ -80,16 +91,18 @@ $(document).ready(function () {
         })
     });
 
-    $(".reply_button").on("click", function (e) {
-        e.preventDefault();
+    $('body').on('click', '.reply_button', function (e) {
+            e.preventDefault();
 
-        $this = $(this);
-        var id = $this.attr("id");
-        $(".li_comment_" + id).append($(".form_wrapper"));
-        console.log(id);
-        //$(".reply_id").attr("value", id);
-        $(".reply_id").attr("value", id);
-    });
+            $this = $(this);
+            var id = $this.attr("id");
+            $(".li_comment_" + id).append($(".form"));
+            console.log(id);
+            //$(".reply_id").attr("value", id);
+            $(".reply_id").attr("value", id);
+        }
+    )
+    ;
 
 });
 

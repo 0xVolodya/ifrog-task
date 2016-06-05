@@ -7,6 +7,17 @@ require 'database.php';
 
 if ( isset( $_POST["data"] ) ) {
 	Database::insert( json_decode($_POST["data"], true) );
+
+//	echo Database::returnList();
+	$array=array();
+//	$array["list"]=json_encode(Database::returnList());
+//	$array["select"]=json_encode(Database::returnSelect());
+
+	$array["list"]=Database::returnList();
+	$array["select"]=Database::returnSelect();
+
+	echo json_encode($array);
+
 }
 
 //var_dump($person);

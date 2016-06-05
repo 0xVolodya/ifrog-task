@@ -196,7 +196,7 @@ WHERE node.lft BETWEEN parent.lft and parent.rgt
 GROUP BY node.user_name
 ORDER BY node.lft' );
 
-		$result[] = "<select size='3' name='Blabla'><option selected='selected' value=''>Выберите имя для удаления</option>";
+		$result[] = "<select size='5' name='Blabla'><option selected='selected' value=''>Выберите имя для удаления</option>";
 
 		foreach ( $rows as $row ) {
 			if ( intval( $row['depth'] ) == 0 ) {
