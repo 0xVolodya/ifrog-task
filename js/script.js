@@ -1,6 +1,5 @@
-
 $(document).ready(function () {
-    $body=$('body');
+    $body = $('body');
 
     $body.on('click', '#button1', function (e) {
         e.preventDefault();
@@ -21,8 +20,6 @@ $(document).ready(function () {
         var input1 = $('#input1'),
             parent_id = 1;
         input1.val();
-        console.log();
-
         if ($(".reply_id").attr("value") != "") {
             parent_id = $(".reply_id").attr("value");
         }
@@ -31,37 +28,32 @@ $(document).ready(function () {
             "name": input1.val(),
             "parent_id": parent_id
         };
+        if (input1.val().length > 0) {
+            $.ajax({
+                type: 'post',
+                url: 'create.php',
+                data: {data: JSON.stringify(person)},
+                success: function (data) {
+                    var array = JSON.parse(data);
+
+                    $(".form_wrapper").html($(".form"));
+
+                    $(".list_wrapper").html(array["list"]);
+
+                    $(".select_wrapper").html(array["select"]);
 
 
-        console.log(JSON.stringify(person));
-        console.log(person);
-
-        $.ajax({
-            type: 'post',
-            url: 'create.php',
-            data: {data: JSON.stringify(person)},
-            success: function (data) {
-                var array=JSON.parse(data);
-                console.log(array["list"]);
-
-                $(".form_wrapper").html($(".form"));
-
-                $(".list_wrapper").html(array["list"]);
-
-                $(".select_wrapper").html(array["select"]);
-
-
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                console.log(xhr.status);
-                console.log(thrownError);
-            }
-        })
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                }
+            })
+        }
     });
 
-    $(".select_wrapper").on('change','select', function (e) {
+    $(".select_wrapper").on('change', 'select', function (e) {
         e.preventDefault();
-        console.log($(this).val());
         var person = {
 
             id: $(this).val()
@@ -72,7 +64,7 @@ $(document).ready(function () {
             url: 'delete.php',
             data: {data: JSON.stringify(person)},
             success: function (data) {
-                var array=JSON.parse(data);
+                var array = JSON.parse(data);
 
                 $(".form_wrapper").html($(".form"));
 
@@ -94,7 +86,6 @@ $(document).ready(function () {
             $this = $(this);
             var id = $this.attr("id");
             $(".li_comment_" + id).append($(".form"));
-            console.log(id);
             $(".reply_id").attr("value", id);
         }
     );

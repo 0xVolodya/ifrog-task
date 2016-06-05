@@ -34,7 +34,7 @@ class Database {
 	public static function insert( $data ) {
 		$pdo = Database::connect();
 		Database::isTableExists( $pdo, 'table_list' );
-		Database::ifEmptyInit( $pdo, 'table_list' );
+		Database::ifEmptyTable( $pdo, 'table_list' );
 
 		$pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
@@ -69,7 +69,7 @@ class Database {
 
 		Database::isTableExists( $pdo, 'table_list' );
 
-		Database::ifEmptyInit( $pdo, 'table_list' );
+		Database::ifEmptyTable( $pdo, 'table_list' );
 
 		$pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
@@ -146,11 +146,10 @@ ORDER BY node.lft' );
 	public static function deleteNode( $data ) {
 		$id  = $data['id'];
 		$pdo = Database::connect();
-		Database::ifEmptyInit( $pdo, 'table_list' );
+		Database::ifEmptyTable( $pdo, 'table_list' );
 
 
 		Database::isTableExists( $pdo, 'table_list' );
-		Database::ifEmptyInit( $pdo, 'table_list' );
 
 		$pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
@@ -184,7 +183,7 @@ ORDER BY node.lft' );
 
 		Database::isTableExists( $pdo, 'table_list' );
 
-		Database::ifEmptyInit( $pdo, 'table_list' );
+		Database::ifEmptyTable( $pdo, 'table_list' );
 
 		$pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
@@ -216,16 +215,19 @@ ORDER BY node.lft' );
 	}
 
 	private static function isTableExists( $dbh, $name ) {
-		$results = $dbh->query( "SHOW TABLES LIKE '$name'" );
-		if ( ! $results ) {
-			die( print_r( $dbh->errorInfo(), true ) );
+		$results = $dbh->query( "SHOW TABLES LIKE '".$name."'" );
+//		var_dump($results);
+		if ( $results->rowCount() <= 0 ) {
+			echo( "Таблица не создана. Создайте" ."<br/>");
+//			die( print_r( $dbh->errorInfo(), true ) );
+			die() ;
 		}
 		if ( $results->rowCount() > 0 ) {
 //			echo 'table exists';
 		}
 	}
 
-	private static function ifEmptyInit( $pdo, $name ) {
+	private static function ifEmptyTable( $pdo, $name ) {
 		$stmt = $pdo->prepare( 'SELECT * FROM ' . $name );
 		$stmt->execute();
 
