@@ -1,0 +1,55 @@
+body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 320px;
+    height: 320px;
+    margin: auto;
+    font-family: sans-serif;
+}
+
+input[type="button"] {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 10px 0 0;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+    background: #a9e66e;
+    border: none;
+    padding: 0 10px;
+    font-size: 16px;
+    color: #222;
+    transition: all 200ms linear;
+}
+input[type="button"]:hover {
+    background: #5eb50a;
+    color: #fff;
+}
+ul {
+    padding: 0;
+    margin: 30px 0;
+}
+ul li {
+    position: relative;
+    margin: 0 0 10px;
+    padding: 0 0 0 15px;
+    list-style-type: none;
+}
+ul li:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #48860b;
+}
+select{
+    margin-bottom: 300px;
+}
