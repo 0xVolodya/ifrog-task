@@ -80,7 +80,7 @@ WHERE node.lft BETWEEN parent.lft and parent.rgt
 GROUP BY node.user_name
 ORDER BY node.lft' );
 
-		$result[] = "<ul>";
+		$result[] = "<ul class='comments'>";
 		$prev     = 1;
 		$current  = 0;
 
@@ -93,7 +93,7 @@ ORDER BY node.lft' );
 			if ( $current > $prev ) {
 
 				$result[] = '<li>';
-				$result[] = '<ul >';
+				$result[] = '<ul class="comments">';
 				$result[] = '<li class="li_comment li_comment_' . $row['id'] . '">';
 				$result[] = '<p class=" li_comment-text">' . $row["user_name"] . '</p>';
 				$result[] = "<a href=\"\" class=\"reply_button\" id=\"{$row['id']}\">вставить</a>";
